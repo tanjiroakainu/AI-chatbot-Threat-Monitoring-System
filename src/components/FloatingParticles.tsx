@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-const PARTICLE_COUNT = 32;
-const AMBER = 'rgba(251, 191, 36, 0.4)';
-const ZINC = 'rgba(161, 161, 170, 0.25)';
+const PARTICLE_COUNT = 40;
+const AMBER = 'rgba(251, 191, 36, 0.55)';
+const ZINC = 'rgba(212, 212, 216, 0.35)';
 
 function Particle({ delay, duration, x, y, size, color }: {
   delay: number;
@@ -37,7 +37,7 @@ export default function FloatingParticles() {
       duration: 12 + (i % 7),
       x: (i * 17 + 11) % 94,
       y: (i * 23 + 7) % 92,
-      size: 6 + (i % 6),
+      size: 8 + (i % 5),
       color: i % 3 === 0 ? AMBER : ZINC,
     }));
   }, []);
