@@ -28,7 +28,9 @@ async function getAvailableModel(apiKey: string): Promise<string | null> {
 export async function sendToGemini(userMessage: string): Promise<string> {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   if (!apiKey || typeof apiKey !== 'string') {
-    throw new Error('Gemini API key is not configured. Set VITE_GEMINI_API_KEY in .env');
+    throw new Error(
+      'Gemini API key is not configured. Locally: set VITE_GEMINI_API_KEY in .env. On Vercel: add VITE_GEMINI_API_KEY in Project Settings → Environment Variables, then redeploy.'
+    );
   }
 
   const listModel = await getAvailableModel(apiKey);

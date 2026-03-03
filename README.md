@@ -65,4 +65,21 @@ npm run preview
 
 ## Deploy (Vercel)
 
-The project includes `vercel.json` for Vercel deployment. Push to GitHub and import the repo in [Vercel](https://vercel.com); the build and rewrites are configured automatically. Set **Environment Variable** `VITE_GEMINI_API_KEY` in the Vercel project for AI Chat to work in production.
+The project includes `vercel.json` for Vercel deployment. Push to GitHub and import the repo in [Vercel](https://vercel.com); the build and rewrites are configured automatically.
+
+**For AI Chat to work on Vercel:**
+
+1. **Environment variable**  
+   In the Vercel project: **Settings → Environment Variables** add:
+   - **Name:** `VITE_GEMINI_API_KEY`  
+   - **Value:** your Gemini API key  
+   Apply to Production (and Preview if you want). Save.
+
+2. **Redeploy**  
+   Trigger a new deployment (e.g. **Deployments → … → Redeploy**) so the new env var is baked into the build. Vite only injects `VITE_*` at build time.
+
+3. **Google API key restrictions (if you use them)**  
+   If your Gemini key has **HTTP referrer** restrictions in [Google Cloud Console](https://console.cloud.google.com/apis/credentials), add your Vercel URL so the browser can call the API, e.g.:
+   - `https://your-project.vercel.app/*`
+   - or `https://*.vercel.app/*`  
+   Otherwise the API may return 403 and the AI chat will fail.
